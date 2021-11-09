@@ -1,6 +1,6 @@
 import { GeoJsonObject } from 'geojson'
 import React from "react";
-import { MapContainer, GeoJSON} from "react-leaflet";
+import { MapContainer, GeoJSON, GeoJSONProps} from "react-leaflet";
 import "./map.scss";
 
 import russiaDistrictsData from './russia.json';
@@ -14,8 +14,19 @@ const Map = () => {
   };
 
   const countryStyle = {
-    fillColor: 'tomato',
-    fillOpacity: 0.5
+    fillColor: 'gray',
+    fillOpacity: 0.5,
+    color: 'white',
+    weight: 1
+  }
+
+
+
+  const featureAction = (district:any, layer:any) => {
+    const name = district.properties.name;
+    console.log(district.properties.name);
+    console.log(layer);
+    layer.bindPopup(name);
   }
 
   return (
@@ -27,7 +38,7 @@ const Map = () => {
       scrollWheelZoom={false}
       style={mapStyle}
     >
-      <GeoJSON style={countryStyle} data={russiaDistrictsData as GeoJsonObject} />
+      <GeoJSON style={countryStyle} data={russiaDistrictsData as GeoJsonObject} onEachFeature={featureAction}/>
       {/* <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
@@ -45,7 +56,7 @@ const Map = () => {
     scrollWheelZoom={false}
     style={mapStyle}
   >
-    <GeoJSON style={countryStyle} data={federalDistricts as GeoJsonObject} />
+    <GeoJSON style={countryStyle} data={federalDistricts as GeoJsonObject}  onEachFeature={featureAction}/>
     {/* <TileLayer
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png"
