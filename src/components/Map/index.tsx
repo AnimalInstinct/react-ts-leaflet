@@ -5,6 +5,7 @@ import "./map.scss";
 
 import russiaDistrictsData from './russia.json';
 import federalDistricts from './federalDistricts.json'
+import { GeoJSONEvent } from 'leaflet'
 
 const Map = () => {
   const mapStyle = {
@@ -27,6 +28,10 @@ const Map = () => {
     console.log(district.properties.name);
     console.log(layer);
     layer.bindPopup(name);
+    layer.on({click: (e: GeoJSONEvent) => {
+      const target = e.target
+      console.log('Clicked::', target.feature.properties.name);
+    }})
   }
 
   return (
