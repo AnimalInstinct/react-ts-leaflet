@@ -55,7 +55,9 @@ const Map = () => {
         A pretty CSS3 popup. <br /> Easily customizable.
       </Popup>
     </Marker> */}
-  </MapContainer></>
+  </MapContainer>
+  <h2><a href="https://github.com/AnimalInstinct/react-ts-leaflet">Github</a></h2>
+  </>
   );
 };
 
